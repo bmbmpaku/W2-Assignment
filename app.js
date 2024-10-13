@@ -10,7 +10,7 @@ const images = [
     { src: "./images/4.jpg", alt: "Hornsea Beach", title: "A Day at Hornsea Beach" },
     { src: "./images/1.jpg", alt: "Worlds within Worlds", title: "Worlds within Worlds" },
     { src: "./images/2.jpg", alt: "Timber Frames on Sand", title: "Timber Frames on Sand" },
-    { src: "./images/3.jpg", alt: "London Q F Week", title: "London Q F Week" },
+    { src: "./images/3.jpg", alt: "London Q F Week", title: "London Queer Fashion Week" },
 ];
 
 function updateDisplay(index) {
@@ -33,14 +33,25 @@ images.forEach((image, i) => {
     thumbnailContainer.appendChild(img);
 });
 
-leftButton.addEventListener("click", () => {
+function navigateLeft() {
     imgIndex = (imgIndex - 1 + images.length) % images.length;
     updateDisplay(imgIndex);
-});
+}
 
-rightButton.addEventListener("click", () => {
+function navigateRight() {
     imgIndex = (imgIndex + 1) % images.length;
     updateDisplay(imgIndex);
+}
+
+leftButton.addEventListener("click", navigateLeft);
+rightButton.addEventListener("click", navigateRight);
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+        navigateLeft();
+    } else if (event.key === "ArrowRight" || event.key === " ") {
+        navigateRight();
+    }
 });
 
 updateDisplay(imgIndex);
